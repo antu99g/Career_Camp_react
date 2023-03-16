@@ -26,7 +26,7 @@ To run this project, run the following command
 
 ## Hosted Link
 
-Visit site: [Career Camp](https://foodie-7cb378.netlify.app)
+Visit site: [Career Camp](https://career-camp-088361.netlify.app)
 
 ## Screenshots
 
