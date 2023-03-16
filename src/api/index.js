@@ -1,4 +1,4 @@
-const prefix = "http://localhost:8000";
+const prefix = "https://career-camp-api.onrender.com";
 
 
 // Function to call fetch-api for different url (with authentication token)
