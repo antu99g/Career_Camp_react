@@ -1,11 +1,11 @@
-const prefix = "https://localhost:8000";
+const prefix = "http://localhost:8000";
 
 
 // Function to call fetch-api for different url (with authentication token)
 
 const customFetch = async (url, config) => {
    // Fetching authentication token from local storage
-	const token = window.localStorage.getItem('TOKEN_KEY');
+	const token = window.localStorage.getItem('CAREER_CAMP_TOKEN_KEY');
    
    // Stringify form body (if present)
    if(config.body){
@@ -14,7 +14,7 @@ const customFetch = async (url, config) => {
    
    // Request headers
 	const headers = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json", // default content-type
    };
 
    // If token present add it to headers
@@ -30,8 +30,8 @@ const customFetch = async (url, config) => {
       if (json.success) {
          return json;
       }
-      
-		throw new Error(json.message);
+
+      throw new Error(json.message);      
    } catch (err) {
 		return {
          api_call_success: false,
@@ -43,23 +43,23 @@ const customFetch = async (url, config) => {
 
 
 // Api call for log-in a user
-export const login = async (email, password) => {
-	const response = await customFetch("/user/login", {
+export const login = async (employeeId, password) => {
+   const response = await customFetch("/user/login", {
       method: "POST",
-      body: { email, password },
+      body: { employeeId, password },
    });
    return response;
-}
+};
 
 
 // Api call for log-in a user
-export const signup = async (formBody) => {
-	const response = await customFetch("/user/signup", {
+export const signup = async (employeeId, password) => {
+   const response = await customFetch("/user/signup", {
       method: "POST",
-      body: formBody,
+      body: { employeeId, password },
    });
    return response;
-}
+};
 
 
 // Api call for fetching all students
@@ -71,11 +71,20 @@ export const fetchAllStudents = async () => {
 };
 
 
-// Api call for fetching all students
-export const addNewStudent = async () => {
+// Api call for register new student
+export const addNewStudent = async (formBody) => {
    const response = await customFetch("/student/add", {
       method: "POST",
-      body: {}
+      body: formBody,
+   });
+   return response;
+};
+
+
+// Api call for register new student
+export const deleteStudent = async (id) => {
+   const response = await customFetch(`/student/${id}/delete`, {
+      method: "DELETE"
    });
    return response;
 };
@@ -87,4 +96,71 @@ export const fetchAllInterviews = async () => {
       method: "GET",
    });
    return response;
+};
+
+
+// Api call for adding new interview
+export const addNewInterview = async (formBody) => {
+   const response = await customFetch("/interview/create", {
+      method: "POST",
+      body: formBody,
+   });
+   return response;
+};
+
+
+// Api call for register new student
+export const deleteInterview = async (id) => {
+   const response = await customFetch(`/interview/${id}/delete`, {
+      method: "DELETE",
+   });
+   return response;
+};
+
+
+// Api call for adding student to an interview
+export const addStudentToInterview = async (formBody) => {
+   const response = await customFetch("/interview/add-student", {
+      method: "POST",
+      body: formBody,
+   });
+   return response;
+};
+
+
+// Api call for changing status of a student in an interview
+export const changeStatus = async (formBody) => {
+   const response = await customFetch("/interview/status/set", {
+      method: "POST",
+      body: formBody,
+   });
+   return response;
+};
+
+
+// Api call for downloading all student info
+export const downloadStudentsLog = async () => {
+   const response = await customFetch("/students/log", {
+      method: "GET"
+   });   
+   const blob = new Blob([response.file]);
+   const url = URL.createObjectURL(blob);
+   const link = document.createElement("a");
+   link.href = url;
+   link.download = "students_log.csv";
+   link.click();
+};
+
+
+// Api call for downloading all interview info
+export const downloadInterviewLog = async () => {
+   const response = await customFetch("/interview/log", {
+      method: "GET"
+   });
+   const blob = new Blob([response.file]);
+   const url = URL.createObjectURL(blob);
+   const link = document.createElement("a");
+   link.href = url;
+   link.download = "interview_log.csv";
+   link.click();
 };

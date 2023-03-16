@@ -1,0 +1,222 @@
+/* Button to download interview log */
+.downloadBtn{
+   position: absolute;
+   top: 1vh;
+   right: 2vw;
+	background-color: rgb(226, 45, 226);
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 8px 6px;
+	font-size: 1.2em;
+	font-weight: 600;
+}
+.downloadBtn:hover{
+   cursor: pointer;
+}
+.downloadBtn:active{
+   transform: scale(.98);
+}
+
+
+/* Form to add new interview */
+
+.interviewForm{
+   margin-top: 5vh;
+   padding: 2vh 2vw;
+   padding-left: 30px;
+   position: relative;
+	border-top: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+}
+.interviewField > h4{
+   margin-bottom: 15px;
+}
+.interviewField input[type='text']{
+   margin-left: 10px;
+}
+.interviewField input[type='date']{
+   margin-left: 26px;
+}
+.interviewForm button{
+   padding: 3px 5px 4px;
+   margin-top: 2vh;
+	background-color: transparent;
+	border: 2px solid rgb(179, 26, 179);
+	border-radius: 5px;
+	color: rgb(179, 26, 179);
+	font-weight: 600;
+}
+.interviewForm button svg{
+   margin-right: 5px;
+}
+.interviewFormHeader{
+   margin-bottom: 3vh;
+}
+
+/* section to add student to an interview (inside form) */
+.addStudentSection{
+   position: relative;
+   display: flex; 
+   margin: 3vh 0 1vh;
+}
+.addStudentBtn > svg{
+   margin: -3px 0 0 4px;
+}
+.studentList{
+   background-color: white;
+   position: absolute;
+   top: 100%;
+   z-index: 1;
+   border: 1px solid grey;
+}
+.studentList > div{
+   padding: 2px 5px;
+   border-top: 1px solid lightgrey;
+}
+.addStudentBtn{
+   padding: 3px 0 3px 5px;
+   position: relative;
+   border: 1px solid black;
+   border-right: 0;
+}
+.addStudentBtn:hover{
+   cursor: pointer;
+}
+.addStudentBtn:after{
+   content: '';
+   height: 22px;
+   width: 22px;
+   position: absolute;
+   right: -11px;
+   top: 4px;
+   border-bottom: 1px solid black;
+   border-right: 1px solid black;
+   transform: rotate(-43deg);
+}
+.addedStudents{
+   margin-left: 30px;
+   display: flex;
+}
+.addedStudents > span{
+   border: 1px solid black;
+   padding: 2px 2px 0 8px;
+   margin-right: 8px;
+   border-radius: 25px;
+}
+.addedStudents > span > svg{
+   margin-left: 5px;
+}
+
+
+/* List of all interviews */
+
+.noInterview{
+   margin-left: 10px;
+   font-size: 1.2em;
+   color: grey;
+}
+.allInterviewList{
+   margin: 4vh 0;
+   padding-left: 3vw;
+}
+.allInterviewList h2{
+   margin-bottom: 3vh;
+   color: purple;
+}
+
+
+/* Each interview in list of interviews */
+
+.eachInterview{
+   padding: 5px 10px;
+   border: 1px solid purple;
+   width: 70%;
+   margin-top: 4vh;
+   border-radius: 5px;
+   position: relative;
+}
+.eachInterview > .deleteIcon{
+	position: absolute;
+	font-size: 1.3em;
+	color: rgb(226, 9, 9);
+	background-color: white;
+	top: -8px;
+	right: -8px;
+}
+.eachInterview > .confirmDelete{
+	position: absolute;
+	top: -5px;
+	right: -8px;
+	border: 1px solid grey;
+	background-color: white;
+   z-index: 2;
+}
+.eachInterview > .confirmDelete > div{
+	padding: 0 3px;
+}
+.eachInterview > .confirmDelete > div:hover{
+	cursor: pointer;
+}
+.eachInterview > .confirmDelete div:first-child{
+	color: red;
+	border-bottom: 1px solid grey;
+}
+.companyName, .interviewDate{
+   color: darkslategrey;
+   font-size: 1.2em;
+   margin: 10px 5px;
+}
+.eachInterview > form{
+   position: absolute;
+   top: 20px;
+   right: 10px;
+}
+.arrowDown{
+   position: absolute;
+   top: 60px;
+   right: 20px;
+   font-size: 1.5em;
+   color: purple;
+}
+
+
+/* List of students in an interview */
+
+.listOfStudents{
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+.listOfStudents > li{
+   padding: 5px;
+   padding-left: 1vw;
+   border-top: 1px solid lightgrey;
+   position: relative;
+}
+.listOfStudents > li p:first-child{
+   margin: 0 0 2px;
+}
+.listOfStudents > li > .college{
+   color: grey;
+}
+.listOfStudents li form {
+   position: absolute;
+   top: 25%;
+   right: 5px;
+}
+.listOfStudents > li p small {
+   margin-left: 10px;
+}
+.submitBtn {   
+   background-color: transparent;
+   border: 2px solid rgb(179, 26, 179);
+   border-radius: 5px;
+   color: rgb(179, 26, 179);
+   font-weight: 600;
+   margin-left: 5px;
+}
+.noStudents{
+   color: grey;
+   margin: 5px 8px;
+}

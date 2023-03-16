@@ -29,3 +29,7 @@
    color: white;
    transform: scale(1.05);
 }
+.logoutIcon{
+   margin-right: 6px;
+   margin-top: -3px;
+}

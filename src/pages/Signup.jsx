@@ -9,8 +9,6 @@ import { toast } from "react-toastify";
 function Signup () {
    const idRef = useRef(); // collecting email from input
 
-   const usernameRef = useRef(); // collecting username from input
-
    const passwordRef = useRef(); // collecting password from input
 
    const cPasswordRef = useRef(); // collecting confirm-password from input
@@ -28,15 +26,24 @@ function Signup () {
          toast.error("Error in username/password");
          return;
       } else {
-         await signup(idRef.current.value, usernameRef.current.value, passwordRef.current.value);
-         toast.success('New user created!');
-         navigate("/login");
+         const response = await signup(idRef.current.value, passwordRef.current.value);
+         e.target.reset();
+         if(response.success){
+            if(response.message){
+               toast.info('User already registered');
+            } else {
+               toast.success('New user created!');
+            }
+            navigate("/login");
+         } else {
+            toast.error('Error in signing up');
+         }
       }
    };
 
 
    // Navigate to homepage if user already logged-in
-   if (auth.user) {
+   if (auth.authorized) {
       return <Navigate to="/" />;
    }
 
@@ -46,7 +53,7 @@ function Signup () {
       <div className={styles.formContainer}>
          <h1 className={styles.logo}>Career Camp</h1>
 
-         <h3>Sign Up</h3>
+         <h4>Sign Up</h4>
 
          <form onSubmit={handleFormSubmit}>
             <p>Employee Id</p>

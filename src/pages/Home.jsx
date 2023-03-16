@@ -1,29 +1,67 @@
-import { useLayoutEffect, useRef, useState } from "react";
-import { fetchAllStudents, addNewStudent } from "../api";
+import { useLayoutEffect, useState } from "react";
+import { fetchAllStudents, addNewStudent, deleteStudent, downloadStudentsLog } from "../api";
 import styles from '../styles/home.module.css';
-import {FaArrowDown, FaPlus} from 'react-icons/fa';
+import { FaArrowDown, FaPlus } from "react-icons/fa";
+import { toast } from "react-toastify";
+import Student from "../components/Student";
 
 function Home () {
+   // List of all students
    const [students, setStudents] = useState([]);
+
 
    useLayoutEffect(() => {
       (async () => {
-         const response = await fetchAllStudents();
+         const response = await fetchAllStudents(); // api call for fetching all students
          setStudents(response.students);
       })();
    }, []);
 
 
+   // Function for adding new student
    const handleAddNewStudent = async (e) => {
       e.preventDefault();
-      const response = await addNewStudent();
+      const { target } = e;
+
+      let formBody = {}; // storing all form data in an object
+      for (let i = 0; i < target.length; i++) {
+         if (target[i].type !== "submit") {
+            let key = target[i].name;
+            let value = target[i].value;
+            formBody[key] = value;
+         }
+      }
+      const response = await addNewStudent(formBody); // api call for adding new student
+      if(response.success){
+         setStudents((studentList) => [...studentList, response.student]); // adding new student to students list
+         toast.success('New student registered!!');
+      } else {
+         toast.error("Error in registering student");
+      }
+      e.target.reset(); // clearing form after submitting
    }
+
+
+   // Function for deleting a student
+   const handleDeleteStudent = async (id) => {
+      const response = await deleteStudent(id); // api call for deleting a student
+      if (response.success) {
+         // removing deleted student from students-list
+         setStudents((students) =>
+            students.filter((students) => students._id !== id)
+         );
+         toast.warn("Student Deleted", { icon: false });
+      } else {
+         toast.error("Error in deleting student");
+      }
+   };
+
 
    return (
       <div>
-         <button className={styles.downloadBtn}><FaArrowDown />Download Students Log</button>
+         <button className={styles.downloadBtn} onClick={() => downloadStudentsLog()}><FaArrowDown/>Download Students Log</button>
 
-         <form onSubmit={handleAddNewStudent}>
+         <form onSubmit={handleAddNewStudent} className={styles.studentAddForm} >
             <div>
                <div>
                      <h5>Student Details</h5>
@@ -43,10 +81,10 @@ function Home () {
                      <h5>Placement Status</h5>
                      <div>
                         <input type="radio" name="placementStatus" value="Placed" id="placed" />
-                        <label for="placed">Placed</label>
+                        <label>Placed</label>
                      </div>
                      <input type="radio" name="placementStatus" value="Not placed" id="notPlaced" />
-                     <label for="notPlaced">Not Placed</label>
+                     <label>Not Placed</label>
                </div>
             </div>
 
@@ -56,22 +94,13 @@ function Home () {
 
          <h2 className={styles.studentHeader}>Students</h2>
 
-         <div className={styles.allStudentList}>
-            {students.map((student) => {
-               return (
-                  <div>
-                        <span>
-                           <p className={styles.name}>{student.name}</p>
-                           <p className={styles.college}>{student.college}</p>
-                        </span>
-                        <span>
-                           <p className={styles.batch}>Batch: {student.batch}</p>
-                           <small className={styles.pStatus}>{student.placementStatus}</small>
-                        </span>
-                  </div>
-               );
-            })}            
-         </div>
+         {students && students.length > 0 ? (
+            <div className={styles.allStudentList}>
+               {students.map((student, i) => <Student student={student} handleDeleteStudent={handleDeleteStudent} key={i} />)}            
+            </div>
+         ) : (
+            <p className={styles.noStudent}>No students added...</p>
+         )}
       </div>
    );
 }

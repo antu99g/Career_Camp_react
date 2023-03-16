@@ -21,7 +21,7 @@ function Login () {
 
 
    // Navigate to homepage if user already logged-in
-   if (auth.user) {
+   if (auth.authorized) {
       return <Navigate to="/" />;
    }
 
@@ -30,7 +30,7 @@ function Login () {
       <div className={styles.formContainer}>
          <h1 className={styles.logo}>Career Camp</h1>
 
-         <h3>Log in</h3>
+         <h4>Log in</h4>
 
          <form onSubmit={handleFormSubmit}>
             <p>Employee Id</p>

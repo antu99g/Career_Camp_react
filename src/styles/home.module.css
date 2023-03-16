@@ -1,0 +1,188 @@
+/* Button to download interview log */
+.downloadBtn{
+	display: block;
+	background-color: rgb(226, 45, 226);
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 8px 6px;
+	margin: 2vh 2vw 2vh auto;
+	font-size: 1.2em;
+	font-weight: 550;
+}
+.downloadBtn:hover{
+   cursor: pointer;
+}
+.downloadBtn:active{
+   transform: scale(.98);
+}
+.downloadBtn > svg{
+	margin-right: 3px;
+}
+
+
+/* Form to add new interview */
+
+.studentAddForm{
+	padding: 2vw;
+	border-top: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+	position: relative;
+}
+.studentAddForm > div{
+	display: flex;
+	justify-content: space-around;
+}
+.studentAddForm input{
+	border: 0;
+	border-bottom: 1px solid black;
+} 
+.studentAddForm input, select{
+	margin-left: 0.5vw;
+}
+.studentAddForm button{
+	display: block;
+	padding: 3px 8px 4px 5px;
+	margin: auto;
+   margin-top: 2vh;
+	background-color: transparent;
+	border: 2px solid rgb(179, 26, 179);
+	border-radius: 5px;
+	color: rgb(179, 26, 179);
+	font-weight: 600;
+}
+.studentAddForm button svg{
+	margin-right: 3px;
+}
+
+
+/* List of all students */
+
+.studentHeader{
+	margin: 4vh 2vw 1.5vh;
+	color: purple;
+}
+.allStudentList{
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 1vw;
+}
+.allStudentList > .eachStudent {
+   width: 30%;
+	padding: 1vh 1vw;
+	margin: 1vh 1.5vw;
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid purple;
+	border-radius: 5px;
+}
+
+
+/* Each student in students-list */
+
+.noStudent{
+	margin: 10px 40px;
+	font-size: 1.2em;
+	color: grey;
+}
+.eachStudent{
+	position: relative;
+}
+.eachStudent > svg{
+	position: absolute;
+	font-size: 1.3em;
+	color: rgb(226, 9, 9);
+	background-color: white;
+	top: -8px;
+	right: -8px;
+}
+.eachStudent > span > * {
+	margin: 0;
+}
+.eachStudent > span p:first-child {
+	margin-bottom: 1vh;
+}
+.name{
+	font-size: 1.2em;
+}
+.college{
+	color: grey;
+}
+.batch{
+   font-size: 1.1em;
+}
+
+
+/* Confirmation before deleting student */
+
+.confirmDelete{
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* background-color: white; */
+	background-color: rgba(0, 0, 0, .7);
+}
+.confirmDelete > div{
+	width: 30%;
+	background-color: white;
+	border-radius: 8px;
+}
+.confirmDelete > div > p{
+	margin: 0;
+	padding: 20px 25px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.confirmDelete > div > div{
+	width: 100%;
+	display: flex;
+}
+.confirmDelete > div > div > span{
+	width: 50%;
+	border-top: 1px solid grey;
+	padding: 5px 0;
+	display: flex;
+	justify-content: center;
+	/* display: inline-block; */
+	text-align: center;
+}
+.confirmDelete > div > div > span:hover{
+	cursor: pointer;
+}
+.confirmDelete > div > div span:last-child{
+	color: white;
+	background-color: rgb(230, 15, 15);
+	border-bottom-right-radius: 8px;
+	border-left: 1px solid grey;
+}
+
+
+.placed{
+	color: green;
+}
+.placed::before{
+	content: '';
+	display: inline-block;
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
+	background-color: green;
+	margin-right: 3px;
+}
+.notPlaced{
+	color: rgb(229, 42, 42);
+}
+.notPlaced::before{
+	content: '';
+	display: inline-block;
+	height: 9px;
+	width: 9px;
+	border-radius: 50%;
+	background: rgb(229, 42, 42);
+	margin-right: 3px;
+}

@@ -8,13 +8,16 @@ import "react-toastify/dist/ReactToastify.css";
 const PrivateRoute = ({children}) => {
    const auth = useAuth();
 
+   // If authorized load the component
    if(auth.authorized){
       return children;
    }
 
+   // If not authorized redirect to login-page
    return <Navigate to='/login' />
 }
 
+// Basic error page for 404 status
 const Page404 = () => {
    return (
       <>
@@ -25,16 +28,20 @@ const Page404 = () => {
 };
 
 export default function App() {
+   const auth = useAuth();
+   
    return (
       <div>
          <Navbar />
-         
+
+         {/* Initializaation for notifications  */}
          <ToastContainer
             autoClose={2000}
             newestOnTop={false}
             closeOnClick={true}
             theme="colored"
             pauseOnHover={false}
+            pauseOnFocusLoss={false}
          />
 
          <Routes>
@@ -47,9 +54,15 @@ export default function App() {
                }
             />
 
-            <Route path="/login" element={<Login />} />
+            <Route
+               path="/login"
+               element={auth.authorized ? <Navigate to="/" /> : <Login />}
+            />
 
-            <Route path="/signup" element={<Signup />} />
+            <Route
+               path="/signup"
+               element={auth.authorized ? <Navigate to="/" /> : <Signup />}
+            />
 
             <Route
                path="/interviews"

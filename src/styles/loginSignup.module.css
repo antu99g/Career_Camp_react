@@ -12,9 +12,10 @@
 }
 .formContainer > h1{
    margin: 0;
+   margin-bottom: 10px;
    color: purple;
 }
-.formContainer > h3{
+.formContainer > h4{
    margin-bottom: 0;
 }
 .formContainer > form > p{
@@ -27,7 +28,7 @@
 }
 .formContainer > form > button[type='submit']{
    display: block;
-   padding: 5px 8px 7px;
+   padding: 5px 8px;
    margin: 15px auto 20px;
    border: 0;
    border-radius: 5px;

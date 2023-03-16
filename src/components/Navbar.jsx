@@ -1,11 +1,12 @@
 import {Link} from 'react-router-dom';
 import { useAuth } from '../hooks';
+import {FiLogOut} from 'react-icons/fi';
 import styles from '../styles/navbar.module.css';
 
 function Navbar () {
-   const auth = useAuth();
+   const auth = useAuth(); // hook for consuming authentication status
 
-   if(auth.authorized){
+   if(auth.authorized){ // show navbar if authenticated (hidden for login and signup page)
       return (
          <nav className={styles.nav}>
             <span>
@@ -15,7 +16,7 @@ function Navbar () {
                <Link to="">Jobs</Link>
             </span>
             <span>
-               <Link to="/user/logout">Log Out</Link>
+               <Link to="" onClick={() => auth.logout()}><FiLogOut className={styles.logoutIcon} />Log Out</Link>
             </span>
          </nav>
       );
