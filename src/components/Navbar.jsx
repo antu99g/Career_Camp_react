@@ -6,7 +6,9 @@ import styles from '../styles/navbar.module.css';
 function Navbar () {
    const auth = useAuth(); // hook for consuming authentication status
 
-   if(auth.authorized){ // show navbar if authenticated (hidden for login and signup page)
+   // show navbar only if authenticated
+   // hidden for login and signup page
+   if(auth.authorized){
       return (
          <nav className={styles.nav}>
             <span>

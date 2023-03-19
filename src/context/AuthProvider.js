@@ -19,11 +19,11 @@ export const AuthProvider = ({ children }) => {
    // state containing authentication status
    const [authorized, setAuthorized] = useState(false);
 
-   // Fetching data of logged user (from localstorage)
+   // Fetching login status on refreshing page
    useEffect(() => {
-      // fetching jwt from localstorage (on refreshing page)
-	   const token = window.localStorage.getItem("CAREER_CAMP_TOKEN_KEY");
-      if(token){
+      // fetching jwt from localstorage
+      const token = window.localStorage.getItem("CAREER_CAMP_TOKEN_KEY");
+      if (token) {
          setAuthorized(true);
       }
    }, []);
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       if (res.success) {
          let token = res.token ? String(res.token) : null;
 
-         localStorage.setItem("CAREER_CAMP_TOKEN_KEY", token); // setting jwt to localstorage
+         localStorage.setItem("CAREER_CAMP_TOKEN_KEY", token); // storing jwt in localstorage
          setAuthorized(true);
          toast.success("Logged in successfully!");
       } else {

@@ -21,16 +21,18 @@ function Signup () {
    // Function for sign-up a new user
    const handleFormSubmit = async (e) => {
       e.preventDefault();
+      
       if (cPasswordRef.current.value !== passwordRef.current.value) { // if password doesn't match with confirm-password
          e.target.reset();
          toast.error("Error in username/password");
          return;
-      } else {
+      }
+      else {
          const response = await signup(idRef.current.value, passwordRef.current.value);
-         e.target.reset();
+         e.target.reset(); // clearing form after submit
          if(response.success){
             if(response.message){
-               toast.info('User already registered');
+               toast.info('User already registered'); // if user already registered
             } else {
                toast.success('New user created!');
             }

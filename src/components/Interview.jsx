@@ -40,8 +40,8 @@ function Interview({ interview, handleDeleteInterview }) {
    const statusColor = (status) => {
       const colors = {
          "On hold": "orange",
-         Pass: "green",
-         Fail: "red",
+         "Pass": "green",
+         "Fail": "red",
          "Not Attended": "orangered",
       };
       return { color: colors[status] };
@@ -53,13 +53,12 @@ function Interview({ interview, handleDeleteInterview }) {
       e.preventDefault();
       const { target } = e;
 
-      if (target[0].value === "--Add a student--") {
-         // if no student is selected
+      if (target[0].value === "--Add a student--") { // if no student is selected
          toast.warning("Please select a student");
          return;
       }
 
-      let formBody = {}; // collecting all formdata to an object
+      let formBody = {}; // collecting all formdata in an object
       for (let i = 0; i < target.length; i++) {
          if (target[i].type !== "submit") {
             let key = target[i].name;
@@ -92,6 +91,7 @@ function Interview({ interview, handleDeleteInterview }) {
          }
       }
       const response = await changeStatus(formBody); // api call for changing status of student
+      
       if (response.success) {
          // changing interview-status in list of students
          let updatedCandidates = candidates.map((student) => {

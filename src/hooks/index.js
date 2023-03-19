@@ -6,7 +6,7 @@ export const useAuth = () => {
    return useContext(AuthContext);
 };
 
-// Custom hook for delete confirmation
+// Custom hook for confirming delete
 export const useDelete = () => {
    const [confirmDelete, setConfirmDelete] = useState(false);
 

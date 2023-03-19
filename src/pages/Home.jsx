@@ -19,6 +19,7 @@ function Home () {
 
 
    // Function for adding new student
+
    const handleAddNewStudent = async (e) => {
       e.preventDefault();
       const { target } = e;
@@ -43,6 +44,7 @@ function Home () {
 
 
    // Function for deleting a student
+   
    const handleDeleteStudent = async (id) => {
       const response = await deleteStudent(id); // api call for deleting a student
       if (response.success) {

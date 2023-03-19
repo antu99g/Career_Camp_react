@@ -44,15 +44,13 @@ export default function App() {
             pauseOnFocusLoss={false}
          />
 
+
          <Routes>
-            <Route
-               path="/"
-               element={
-                  <PrivateRoute>
-                     <Home />
-                  </PrivateRoute>
-               }
-            />
+            <Route path="/" element={
+               <PrivateRoute>
+                  <Home />
+               </PrivateRoute>
+            }/>
 
             <Route
                path="/login"
@@ -64,14 +62,11 @@ export default function App() {
                element={auth.authorized ? <Navigate to="/" /> : <Signup />}
             />
 
-            <Route
-               path="/interviews"
-               element={
-                  <PrivateRoute>
-                     <Interviews />
-                  </PrivateRoute>
-               }
-            />
+            <Route path="/interviews" element={
+               <PrivateRoute>
+                  <Interviews />
+               </PrivateRoute>
+            }/>
 
             <Route path="*" element={<Page404 />} />
          </Routes>

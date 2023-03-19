@@ -16,7 +16,7 @@ function Interviews () {
    // States used for adding students in interview-form
    const [showStudents, setShowStudents] = useState(false); // showing list of students to add
 
-   const [list, setList] = useState([]); // list of all students (to select from)
+   const [list, setList] = useState([]); // list of not-selected students (to select from)
 
    const [selected, setSelected] = useState([]); // list of selected students
 
@@ -57,19 +57,27 @@ function Interviews () {
          return student._id;
       });
       const response = await addNewInterview(formBody); // api call for adding new interview
+
       if (response.success) {
          setInterviews((interviewList) => [
             ...interviewList,
             response.newInterview,
-         ]);
-         e.target.reset();
-         setSelected([]);
+         ]); // adding new interview to list of interviews
+
+         e.target.reset(); // clearing form
+
+         setList(students); // filling list of all students (to select from)
+
+         setSelected([]); // clearing list of selected students  
+
          toast.success("Interview scheduled successfully");
       } else {
          toast.error("Error in adding new interview");
       }
    }
 
+   
+   // Function for deleting an interview
    
    const handleDeleteInterview = async (id) => {
       const response = await deleteInterview(id);

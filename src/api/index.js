@@ -7,19 +7,19 @@ const customFetch = async (url, config) => {
    // Fetching authentication token from local storage
 	const token = window.localStorage.getItem('CAREER_CAMP_TOKEN_KEY');
    
-   // Stringify form body (if present)
-   if(config.body){
-      config.body = JSON.stringify(config.body);      
-   }
-   
    // Request headers
-	const headers = {
+   const headers = {
       "Content-Type": "application/json", // default content-type
    };
 
    // If token present add it to headers
-	if (token) {
+   if (token) {
       headers.Authorization = `Bearer ${token}`;
+   }
+   
+   // Stringify form body (if present)
+   if(config.body){
+      config.body = JSON.stringify(config.body);      
    }
 
    try {
@@ -52,7 +52,7 @@ export const login = async (employeeId, password) => {
 };
 
 
-// Api call for log-in a user
+// Api call for sign-up a user
 export const signup = async (employeeId, password) => {
    const response = await customFetch("/user/signup", {
       method: "POST",
@@ -81,7 +81,7 @@ export const addNewStudent = async (formBody) => {
 };
 
 
-// Api call for register new student
+// Api call for deleting a student
 export const deleteStudent = async (id) => {
    const response = await customFetch(`/student/${id}/delete`, {
       method: "DELETE"
@@ -99,7 +99,7 @@ export const fetchAllInterviews = async () => {
 };
 
 
-// Api call for adding new interview
+// Api call to schedule an interview
 export const addNewInterview = async (formBody) => {
    const response = await customFetch("/interview/create", {
       method: "POST",
@@ -109,7 +109,7 @@ export const addNewInterview = async (formBody) => {
 };
 
 
-// Api call for register new student
+// Api call for deleting interview
 export const deleteInterview = async (id) => {
    const response = await customFetch(`/interview/${id}/delete`, {
       method: "DELETE",
@@ -138,7 +138,7 @@ export const changeStatus = async (formBody) => {
 };
 
 
-// Api call for downloading all student info
+// Api call for downloading all student information
 export const downloadStudentsLog = async () => {
    const response = await customFetch("/students/log", {
       method: "GET"
@@ -152,7 +152,7 @@ export const downloadStudentsLog = async () => {
 };
 
 
-// Api call for downloading all interview info
+// Api call for downloading all interview information
 export const downloadInterviewLog = async () => {
    const response = await customFetch("/interview/log", {
       method: "GET"
